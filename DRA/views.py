@@ -3,9 +3,11 @@ from .models import Post
 from .serializers import PostSerializer
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-def Posts(request):
+@csrf_exempt
+def PostsView(request):
     if request.method == 'GET':
         posts = Post.objects.all() # queryset
         serializer = PostSerializer(posts, many=True)
